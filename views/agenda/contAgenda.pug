@@ -1,0 +1,20 @@
+h2 Agenda
+    //span#spanAtPrevias.icon_mostrar-ocultar(onclick="mostrarOcultar('AtPrevias')") &#9660;
+table#contAgenda
+    if turnos.length>0
+        tr
+            th Fecha
+            th Horario
+            th Paciente
+            th Motivo
+        for turno in turnos
+            tr
+                td= turno.fecha.toLocaleDateString()
+                td= turno.horario
+                td= `${turno.apellidoPaciente}, ${turno.nombrePaciente}`
+                td= turno.motivo
+                td 
+                    a.btn-accion(href=`/atenciones/turno/${turno.idTurno}`) 
+                        button() Atender
+    else
+        td.vacio No se registran atenciones previas

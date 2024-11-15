@@ -1,0 +1,34 @@
+extends ../layout.pug
+
+block title
+    title Atencion Médica - Login 
+
+block css
+    link(rel="stylesheet", href="/public/css/style.css")
+
+block scripts
+    script(src="/public/scripts/login.js") 
+
+block contBody
+    .divForm
+        .cont
+            form#formu(onsubmit="return accederAgenda()")
+                .acceso_log_form
+                    .formLine.left
+                        label.identificador(for="usuario") Usuario:
+                        .wrapper_icon_input
+                            span
+                                img.icon_input(src="/public/images/usser.png")
+                            input#usser.valor(type="text" name="usser" value="usuario")
+                        //-label#usserError.error
+                    .formLine.left
+                        label.identificador(for="usuario") Contraseña:
+                        .wrapper_icon_input
+                            span
+                                img.icon_input(src="/public/images/pass.png")
+                            input#pass.valor(type="text", name="pass" value="123") 
+                        //-label#passError.error
+                    .formline.error
+                        label#passError.error
+                .submit-line
+                    input#ingresar.submit(type="submit", value="Ingresar")

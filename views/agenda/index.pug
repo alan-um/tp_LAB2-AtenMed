@@ -1,0 +1,27 @@
+extends ../layout.pug
+
+block title
+    title Atencion Médica - Agenda
+
+block css
+    link(rel="stylesheet", href="/public/css/style.css")
+
+block scripts
+    script(src="/public/scripts/agenda.js") 
+
+block contBody
+    .cont
+        h2 Beinvenido Dr. #{idAgenda}
+    .formFecha.cont
+        form#formu(action=`/agenda/${idAgenda}`)
+            .seleccionarFecha    
+                    input#fecha(type="date", name="fecha",onchange="seleccionarFecha()",value=fecha)
+            .seleccionarAgenda
+                for agenda in agendas
+                    if agenda == idAgenda 
+                        button.btn-agenda.agendaSelec(id=`agenda${agenda}`,onclick=`seleccionarAgenda(${agenda})`) Agenda #{agenda}
+                    else
+                        button.btn-agenda(id=`agenda${agenda}`,onclick=`seleccionarAgenda(${agenda})`) Agenda #{agenda}
+    .agenda.cont
+        .datosAgenda
+            include contAgenda.pug

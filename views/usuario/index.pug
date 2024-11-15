@@ -1,0 +1,32 @@
+extends ../layout.pug
+
+block title
+    title Atencion Médica - USUARIO
+
+block css
+    link(rel="stylesheet", href="/public/css/style.css")
+
+block scripts
+    script(src="/public/scripts/agenda.js") 
+
+block contBody
+    .cont
+        h2 Bienvenido/a Dr/a. #{medico.nombre}
+    .formFecha.cont
+        form#formu(action=`/usuario/${idUsuario}`)
+            .seleccionarFecha.cont     
+                input#fecha(type="date", name="fecha",onchange="seleccionarFecha()",value=fechaSelec)
+                input#idAgenda(type="number", name="idAgenda", value=`${idAgendaSelec}`, style="display:none")
+            .seleccionarAgenda.cont
+                for agenda in agendas
+                    if agenda.idAgenda == idAgendaSelec
+                        button.btn-agenda.agendaSelec(id=`agenda${agenda.idAgenda}`,onclick=`seleccionarAgenda(${agenda.idAgenda})`)
+                            p Agenda:
+                            h3 #{agenda.descEspecialidad}
+                    else
+                        button.btn-agend(id=`agenda${agenda.idAgenda}`,onclick=`seleccionarAgenda(${agenda.idAgenda})`)
+                            p Agenda: 
+                            h3 #{agenda.descEspecialidad}
+    .turnos.cont
+        .listaTurnos
+            include listaTurnos.pug

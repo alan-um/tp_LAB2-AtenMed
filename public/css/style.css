@@ -1,0 +1,89 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: antiquewhite;
+}
+/* main{
+    display: flex;
+    justify-content: center;
+} */
+div.cont{
+    border: 1px solid gray;
+    border-radius: 15px;
+    background-color: white;
+    margin: 20px;
+    padding: 5px;
+    text-align: center;
+}
+h1{
+    padding: auto;
+}
+span.icon_mostrar-ocultar{
+    /*font-size: 8px;*/
+    position: relative;
+    float: right;
+}
+table{
+    margin: auto;
+    border-collapse: collapse;
+    padding-bottom: 10px;
+}
+
+td{
+    border: 1px solid black;
+    padding: 5px;
+    padding-inline: 10px;
+}
+th{
+    border: 1px solid black;
+    background-color: bisque;
+    padding: 5px;
+}
+
+.ocultar{
+    visibility: collapse;
+}
+
+.vacio{
+    border: none;
+}
+
+.divForm{
+    max-width: 400px;
+    display: flex;
+    align-content: center;
+    margin: auto;
+}
+.divForm-horizontal{
+    display: inline-flex;
+}
+.Row{
+    display: inline-block;
+}
+.acceso_log_form{
+    padding: 15px;
+    margin: auto;
+}
+.formLine{
+    padding: 10px;
+    border: 1px solid;
+}
+label{
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: left;
+}
+.wrapper_icon_input{
+    display: flex;
+    align-items: center;
+}
+.icon_input{
+    overflow: visible;
+    height: 15px;
+    display: inline-block;
+    padding: 5px;
+}
+
+.agendaSelec{
+    background-color: blueviolet;
+}

@@ -1,0 +1,73 @@
+extends ../layout.pug
+
+block title
+    title Atencion Médica
+
+block css
+    link(rel="stylesheet", href="/public/css/style.css")
+    link(href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css", rel="stylesheet")
+
+block scripts
+    script(src="/public/scripts/atencion.js" defer)
+    script(src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js")
+
+block contBody
+    .datosPaciente.cont
+        h2 Datos del Turno
+        table
+            tr
+                td= `ID: `
+                    span#idTurno #{turno.idTurno}
+                td= `Fecha: ${turno.fecha.toLocaleDateString()}`
+                td= `Horario: ${turno.horario}`
+            tr
+                td= `Paciente: ${turno.nombrePaciente} ${turno.apellidoPaciente}`
+                td= `Medico: ${turno.nombreMedico} ${turno.apellidoMedico}`
+                td= `Estado: ${turno.estado}`
+            tr
+                td(colspan="3")= `Motivo: ${turno.motivo}`
+    .atencion.cont
+        h2 Notas clínicas
+        .evolucion(style="margin:25px")
+            h4 Evolución del paciente:
+            p#eEvolucion (*)Recuerda que este campo es obligatorio.
+            .cont-Editor(onblur="agregarEvolucion()")
+                #toolbar
+                #editor
+                    p
+                    p
+                    p
+        .diagnostico
+            h4 Diagnóstico:
+            p#eEvolucion (*)Recuerda que este campo es obligatorio.
+            form#formDiagnostico(onsubmit="return false")
+                table
+                    td  
+                        input#descDiagnostico(type="areatext", name="descDiagnostico", placeholder="Agregar diagnóstico")
+                    td 
+                        label(for="tipoDiagnostico") Tipo de diagnóstico:
+                        select#tipoDiagnostico(name="tipoDiagnostico")
+                            option(value="Preliminar") Preliminar
+                            option(value="Confirmado") Confirmado
+                    //-td
+                        input(type="submit", value="Agregar diagnóstico")
+    .hce.cont
+        .datosHce
+            include contAtPrevias.pug
+    .alergias.cont
+        .datosAlergia
+            include contAlergias.pug
+    .antecedentes.cont
+        .datosAntecedentes
+            include contAntecedentes.pug
+    .habitos.cont
+        .datosHabitos
+            include contHabitos.pug
+    .medicamentos.cont
+        .datosMedicamentos
+            include contMedicamentos.pug
+
+    .cerrarAtencion.cont
+        form#formCerrar(action=`/usuario/${turno.idMedico}` onsubmit="return false") 
+            button(onclick="confirmaSalir()") Cerrar
+            button(onclick="guardarDatos()") Guardar

@@ -1,0 +1,17 @@
+h2 Historia Clínica
+    span#spanAtPrevias.icon_mostrar-ocultar(onclick="mostrarOcultar('AtPrevias')") &#9660;
+table#contAtPrevias.ocultar
+    if atPrevias.length>0
+        tr
+            th Fecha
+            th Motivo
+            th Evolución
+            th Diagnóstico
+        for atPrevia in atPrevias
+            tr
+                td= atPrevia.fechaInicio.toLocaleDateString()
+                td= atPrevia.motivo
+                td= atPrevia.descEvolucion
+                td= atPrevia.descDiagnostico
+    else
+        td.vacio No se registran atenciones previas

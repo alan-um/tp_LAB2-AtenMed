@@ -1,0 +1,32 @@
+h2 Agenda
+    //span#spanAtPrevias.icon_mostrar-ocultar(onclick="mostrarOcultar('AtPrevias')") &#9660;
+table#contAgenda
+    if turnos.length>0
+        tr
+            th Fecha
+            th Horario
+            th Paciente
+            th Motivo
+            th Estado
+        for turno in turnos
+            tr
+                td= turno.fecha.toLocaleDateString()
+                td= turno.horario
+                td= `${turno.apellido}, ${turno.nombre}`
+                td= turno.motivo
+                td= turno.estado 
+                //-td(style="border:none")
+                    a.btn-accion(href=`/atenciones/${turno.idTurno}`) 
+                            button() Ver
+                td(style="border:none")
+                    a.btn-accion(href=`/atenciones/verHCE/${turno.idPaciente}?medico=${medico.idMedico}`) 
+                            button() Ver HCE
+                    if turno.estado=="Pendiente"
+                        a.btn-accion(href=`/atenciones/atender/${turno.idTurno}`) 
+                            button() Atender
+                    else
+                        //if fechaSelec==HOY 
+                        a.btn-accion(href=`/atenciones/atender/${turno.idTurno}`) 
+                            button() ¿Editar?
+    else
+        td.vacio No hay turnos registrados para el #{fechaSelec} en la agenda: #{idAgendaSelec}
