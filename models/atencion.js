@@ -10,7 +10,7 @@ class Atencion {
     }*/
 
     static async generar(idTurno) {
-        const fechaInicio = new Date(Date.now());
+        const fechaInicio = new Date(Date.now()).toISOString().slice(0,10);
         const fechaFin = fechaInicio;
         console.log(fechaInicio)
 

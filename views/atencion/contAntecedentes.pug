@@ -1,31 +1,32 @@
 h2 Antecedentes
     span#spanAntecedentes.icon_mostrar-ocultar(onclick="mostrarOcultar('Antecedentes')") &#9660;
-if antecedentes.length<=0
-    p.vacio No se tiene constancia de antecedentes clínicos del paciente
-table#contAntecedentes.ocultar    
-    thead
-        tr
-            th Descripción
-            th Desde
-            th Hasta
-        if antecedentes.length>0
-            for antecedente in antecedentes
-                tr
-                    td= antecedente.descAntecedentes
-                    td= antecedente.fechaDesde.toISOString().slice(0,10)
-                    if(antecedente.fechaHasta)
-                        td= antecedente.fechaHasta.toISOString().slice(0,10)
-                    else
-                        td -----
-    tbody#nuevosAntecedentes
-    tfoot
-        tr 
-            form#formAntecedentes(onsubmit="return agregarAntecedente()") 
-                td
-                    input#descAntecedentes(type="text", name="descAntecedentes", style="border:none",placeholder="Nuevo antecedente")
-                td 
-                    input#fechaDesdeAnt(type="date", name="fechaDesde", value="2024-11-10")
-                td 
-                    input#fechaHastaAnt(type="date", name="fechaHasta")
-                td(style="border:none")
-                    input(type="submit", value="Agregar antecedente")
+#contAntecedentes.ocultar 
+    if antecedentes.length<=0
+        p.vacio No se tiene constancia de antecedentes clínicos del paciente
+    table   
+        thead
+            tr
+                th Descripción
+                th Desde
+                th Hasta
+            if antecedentes.length>0
+                for antecedente in antecedentes
+                    tr
+                        td= antecedente.descAntecedentes
+                        td= antecedente.fechaDesde.toISOString().slice(0,10)
+                        if(antecedente.fechaHasta)
+                            td= antecedente.fechaHasta.toISOString().slice(0,10)
+                        else
+                            td -----
+        tbody#nuevosAntecedentes
+        tfoot
+            tr 
+                form#formAntecedentes(onsubmit="return agregarAntecedente()") 
+                    td
+                        input#descAntecedentes.inputText(type="text", name="descAntecedentes", style="border:none",placeholder="Nuevo antecedente")
+                    td 
+                        input#fechaDesdeAnt(type="date", name="fechaDesde", value="2024-11-10")
+                    td 
+                        input#fechaHastaAnt(type="date", name="fechaHasta")
+                    td(style="border:none")
+                        input.btn(type="submit", value="Agregar antecedente")

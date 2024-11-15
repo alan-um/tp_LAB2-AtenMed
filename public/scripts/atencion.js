@@ -289,16 +289,20 @@ function cargarNuevosMedicamentos() {
 //----------------------------------------------------------------------------------------------------
 
 
-
+    
 function guardarDatos() {
+    document.getElementById("btn-guardar").disabled = true;
+
     //Valida  y carga evolucion
     if(!HCE.evolucion){
         alert("Debe ingresar la evolucion del paciente!");
+        document.getElementById("btn-guardar").disabled = false;
         return;
     }
     //Valida  y carga diagnostico
     if(!agregarDiagnostico()){
         alert("Debe ingresar el diagnóstico del paciente!");
+        document.getElementById("btn-guardar").disabled = false;
         return;
     }
     //Valida y carga alergias
@@ -322,10 +326,11 @@ function guardarDatos() {
         .then(data => {
             //Esperamos que la API envíe un JSON con errores, sino lo hace cartelito de confirmación y listo.
             if (data.estado) {
-                alert("Se ha cargado todo de diez");
+                alert("Se ha cargado la atención con éxito!");
                 document.getElementById("formCerrar").submit();
             } else {
-                alert("Rayos!!!");
+                alert("No se ha podido cargar la información en la base de datos.");
+                document.getElementById("btn-guardar").disabled = false;
             }
         })
 }

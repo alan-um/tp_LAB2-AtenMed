@@ -112,11 +112,13 @@ class AtencionController {
     async cargarAtencion(req, res) {
         console.log(req.body)
         const data = {};
-        data.estado = false;
+        data.estado = true;
+        let idAtencion
 
         if (req.body.evolucion && req.body.diagnostico.descDiagnostico) {
             //Crea atencion!
-            const idAtencion = await Atencion.generar(req.body.idTurno);
+            idAtencion = await Atencion.generar(req.body.idTurno);
+            console.log(idAtencion)
             //Carga evolucion
             await Atencion.cargarEvolucion(req.body.evolucion, idAtencion);
             //Carga diagnostico
@@ -130,19 +132,19 @@ class AtencionController {
 
 
         if (req.body.alergias.length > 0) {
-            await Alergias.cargar(req.body.alergias, req.body.idTurno);
+            await Alergias.cargar(req.body.alergias, idAtencion);
         }
 
         if (req.body.antecedentes.length>0) {
-            await Antecedentes.cargar(req.body.antecedentes, req.body.idTurno);
+            await Antecedentes.cargar(req.body.antecedentes, idAtencion);
         }
 
         if (req.body.habitos.length>0) {
-            await Habitos.cargar(req.body.habitos, req.body.idTurno);
+            await Habitos.cargar(req.body.habitos, idAtencion);
         }
 
         if (req.body.medicamentos.length>0) {
-            await Medicamentos.cargar(req.body.medicamentos, req.body.idTurno);
+            await Medicamentos.cargar(req.body.medicamentos, idAtencion);
         }
 
         res.send(data);

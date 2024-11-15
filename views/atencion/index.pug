@@ -69,5 +69,5 @@ block contBody
 
     .cerrarAtencion.cont
         form#formCerrar(action=`/usuario/${turno.idMedico}` onsubmit="return false") 
-            button.btn-cerrar(onclick="confirmaSalir()") Cerrar
-            button.btn-guardar(onclick="guardarDatos()") Guardar
+            button#btn-cerrar(onclick="confirmaSalir()") Cerrar
+            button#btn-guardar(onclick="guardarDatos()") Guardar

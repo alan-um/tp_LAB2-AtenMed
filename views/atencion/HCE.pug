@@ -22,57 +22,59 @@ block contBody
         .datosAlergia
             h2 Alergias
                 span#spanAlergias.icon_mostrar-ocultar(onclick="mostrarOcultar('Alergias')") &#9660;
-            if alergias.length<=0
-                p.vacio No se tiene constancia de antecedentes clínicos del paciente
-            else
-                table#contAlergias.ocultar
-                    thead
-                        tr
-                            th Descripción
-                            th Importancia
-                            th Desde
-                            th Hasta
-                    if alergias.length>0
-                        for alergia in alergias
+            #contAlergias.ocultar
+                if alergias.length<=0
+                    p.vacio No se tiene constancia de antecedentes clínicos del paciente
+                else
+                    table
+                        thead
                             tr
-                                td= alergia.descNombreAlergia
-                                td= alergia.descImportancia
-                                td= alergia.fechaDesde.toISOString().slice(0,10)
-                                if(alergia.fechaHasta)
-                                    td= alergia.fechaHasta.toISOString().slice(0,10)
-                                else
-                                    td -----
+                                th Descripción
+                                th Importancia
+                                th Desde
+                                th Hasta
+                        if alergias.length>0
+                            for alergia in alergias
+                                tr
+                                    td= alergia.descNombreAlergia
+                                    td= alergia.descImportancia
+                                    td= alergia.fechaDesde.toISOString().slice(0,10)
+                                    if(alergia.fechaHasta)
+                                        td= alergia.fechaHasta.toISOString().slice(0,10)
+                                    else
+                                        td -----
     .antecedentes.cont
         .datosAntecedentes
             h2 Antecedentes
                 span#spanAntecedentes.icon_mostrar-ocultar(onclick="mostrarOcultar('Antecedentes')") &#9660;
-            if antecedentes.length<=0
-                p.vacio No se tiene constancia de antecedentes clínicos del paciente
-            else
-                table#contAntecedentes.ocultar    
-                    thead
-                        tr
-                            th Descripción
-                            th Desde
-                            th Hasta
-                        if antecedentes.length>0
-                            for antecedente in antecedentes
-                                tr
-                                    td= antecedente.descAntecedentes
-                                    td= antecedente.fechaDesde.toISOString().slice(0,10)
-                                    if(antecedente.fechaHasta)
-                                        td= antecedente.fechaHasta.toISOString().slice(0,10)
-                                    else
-                                        td -----
+            #contAntecedentes.ocultar    
+                if antecedentes.length<=0
+                    p.vacio No se tiene constancia de antecedentes clínicos del paciente
+                else
+                    table
+                        thead
+                            tr
+                                th Descripción
+                                th Desde
+                                th Hasta
+                            if antecedentes.length>0
+                                for antecedente in antecedentes
+                                    tr
+                                        td= antecedente.descAntecedentes
+                                        td= antecedente.fechaDesde.toISOString().slice(0,10)
+                                        if(antecedente.fechaHasta)
+                                            td= antecedente.fechaHasta.toISOString().slice(0,10)
+                                        else
+                                            td -----
     .habitos.cont
         .datosHabitos
             h2 Habitos
                 span#spanHabitos.icon_mostrar-ocultar(onclick="mostrarOcultar('Habitos')") &#9660;
-            table#contHabitos.ocultar
+            #contHabitos.ocultar
                 if habitos.length<=0
                     p.vacio No se tiene información de los habitos del paciente
                 else
-                    table#contHabitos.ocultar
+                    table
                         thead
                             tr
                                 th Descripción
@@ -91,17 +93,18 @@ block contBody
         .datosMedicamentos
             h2 Medicamentos
                 span#spanMedicamentos.icon_mostrar-ocultar(onclick="mostrarOcultar('Medicamentos')") &#9660;
-            if medicamentos.length<=0
-                p.vacio No se tiene constacia de los medicamentos recetados al paciente
-            else
-                table#contMedicamentos.ocultar
-                    thead
-                        tr
-                            th Descripción
-                    if medicamentos.length>0
-                        for medicamento in medicamentos
+            #contMedicamentos.ocultar
+                if medicamentos.length<=0
+                    p.vacio No se tiene constacia de los medicamentos recetados al paciente
+                else
+                    table
+                        thead
                             tr
-                                td= medicamento.descMedicamentos
+                                th Descripción
+                        if medicamentos.length>0
+                            for medicamento in medicamentos
+                                tr
+                                    td= medicamento.descMedicamentos
     .cerrarAtencion.cont
         form#formCerrar(action=`/usuario/${idMedico}`) 
             button.btn-cerrar Cerrar

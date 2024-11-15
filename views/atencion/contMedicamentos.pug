@@ -1,20 +1,21 @@
 h2 Medicamentos
     span#spanMedicamentos.icon_mostrar-ocultar(onclick="mostrarOcultar('Medicamentos')") &#9660;
-if medicamentos.length<=0
-    p.vacio No se tiene constacia de los medicamentos recetados al paciente
-table#contMedicamentos.ocultar
-    thead
-        tr
-            th Descripción
-    if medicamentos.length>0
-        for medicamento in medicamentos
+#contMedicamentos.ocultar
+    if medicamentos.length<=0
+        p.vacio No se tiene constacia de los medicamentos recetados al paciente
+    table
+        thead
             tr
-                td= medicamento.descMedicamentos
-    tbody#nuevosMedicamentos
-    tfoot
-        tr 
-            form#formMedicamentos(onsubmit="return agregarMedicamento()") 
-                td
-                    input#descMedicamentos(type="text", name="descMedicamentos", style="border:none",placeholder="Nuevo medicamento")
-                td(style="border:none")
-                    input(type="submit", value="Agregar medicamento")
+                th Descripción
+        if medicamentos.length>0
+            for medicamento in medicamentos
+                tr
+                    td= medicamento.descMedicamentos
+        tbody#nuevosMedicamentos
+        tfoot
+            tr 
+                form#formMedicamentos(onsubmit="return agregarMedicamento()") 
+                    td
+                        input#descMedicamentos.inputText(type="text", name="descMedicamentos", style="border:none",placeholder="Nuevo medicamento")
+                    td(style="border:none")
+                        input.btn(type="submit", value="Agregar medicamento")

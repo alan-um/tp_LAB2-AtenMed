@@ -1,41 +1,42 @@
 h2 Alergias
     span#spanAlergias.icon_mostrar-ocultar(onclick="mostrarOcultar('Alergias')") &#9660;
-if alergias.length<=0
-    p.vacio No se tiene constancia de antecedentes clínicos del paciente
-table#contAlergias.ocultar
-    thead
-        tr
-            th Descripción
-            th Importancia
-            th Desde
-            th Hasta
-    if alergias.length>0
-        for alergia in alergias
+#contAlergias.ocultar
+    if alergias.length<=0
+        p.vacio No se tiene constancia de antecedentes clínicos del paciente
+    table
+        thead
             tr
-                td= alergia.descNombreAlergia
-                td= alergia.descImportancia
-                td= alergia.fechaDesde.toISOString().slice(0,10)
-                if(alergia.fechaHasta)
-                    td= alergia.fechaHasta.toISOString().slice(0,10)
-                else
-                    td -----
-    tbody#nuevasAlergias
-    tfoot
-        tr 
-            form#formAlergias(onsubmit="return agregarAlergias()") 
-                td
-                    select#descAlergia(type="select", name="descAlergias", style="border:none")
-                        option(value=``) --Seleccionar alergia--
-                        for nombreAlergia in nombresAlergias
-                            option(value=`${nombreAlergia.idNombreAlergia}`) #{nombreAlergia.descNombreAlergia}
-                td
-                    select#importanciaAlergia(type="select", name="importanciaAlergia", style="border:none")
-                        option(value=``) --Seleccionar importancia--
-                        for importanciaAlergia in importanciasAlergias
-                            option(value=`${importanciaAlergia.idImportancia}`) #{importanciaAlergia.descImportancia}
-                td 
-                    input#fechaDesdeAler(type="date", name="fechaDesde", value="2024-11-10")
-                td 
-                    input#fechaHastaAler(type="date", name="fechaHasta")
-                td(style="border:none")
-                    input(type="submit", value="Agregar alergia")
+                th Descripción
+                th Importancia
+                th Desde
+                th Hasta
+        if alergias.length>0
+            for alergia in alergias
+                tr
+                    td= alergia.descNombreAlergia
+                    td= alergia.descImportancia
+                    td= alergia.fechaDesde.toISOString().slice(0,10)
+                    if(alergia.fechaHasta)
+                        td= alergia.fechaHasta.toISOString().slice(0,10)
+                    else
+                        td -----
+        tbody#nuevasAlergias
+        tfoot
+            tr 
+                form#formAlergias(onsubmit="return agregarAlergias()") 
+                    td
+                        select#descAlergia.inputText(type="select", name="descAlergias", style="border:none")
+                            option(value=``) --Seleccionar alergia--
+                            for nombreAlergia in nombresAlergias
+                                option(value=`${nombreAlergia.idNombreAlergia}`) #{nombreAlergia.descNombreAlergia}
+                    td
+                        select#importanciaAlergia(type="select", name="importanciaAlergia", style="border:none")
+                            option(value=``) --Seleccionar importancia--
+                            for importanciaAlergia in importanciasAlergias
+                                option(value=`${importanciaAlergia.idImportancia}`) #{importanciaAlergia.descImportancia}
+                    td 
+                        input#fechaDesdeAler(type="date", name="fechaDesde", value="2024-11-10")
+                    td 
+                        input#fechaHastaAler(type="date", name="fechaHasta")
+                    td(style="border:none")
+                        input.btn(type="submit", value="Agregar alergia")
