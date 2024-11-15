@@ -42,9 +42,9 @@ block contBody
             p#eEvolucion (*)Recuerda que este campo es obligatorio.
             form#formDiagnostico(onsubmit="return false")
                 table
-                    td  
+                    td(style="border:none")  
                         input#descDiagnostico(type="areatext", name="descDiagnostico", placeholder="Agregar diagnóstico")
-                    td 
+                    td(style="border:none") 
                         label(for="tipoDiagnostico") Tipo de diagnóstico:
                         select#tipoDiagnostico(name="tipoDiagnostico")
                             option(value="Preliminar") Preliminar
@@ -69,5 +69,5 @@ block contBody
 
     .cerrarAtencion.cont
         form#formCerrar(action=`/usuario/${turno.idMedico}` onsubmit="return false") 
-            button(onclick="confirmaSalir()") Cerrar
-            button(onclick="guardarDatos()") Guardar
+            button.btn-cerrar(onclick="confirmaSalir()") Cerrar
+            button.btn-guardar(onclick="guardarDatos()") Guardar

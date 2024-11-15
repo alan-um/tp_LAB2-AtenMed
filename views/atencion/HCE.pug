@@ -1,0 +1,107 @@
+extends ../layout.pug
+
+block title
+    title Atencion Médica - HCE
+
+block css
+    link(rel="stylesheet", href="/public/css/style.css")
+    link(href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css", rel="stylesheet")
+
+block scripts
+    script(src="/public/scripts/atencion.js" defer)
+    //-script(src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js")
+
+block contBody
+    .datosPaciente.cont
+        h2 #{paciente.nombre} #{paciente.apellido}
+        h3 Historia clínica electrónica
+    .hce.cont
+        .datosHce
+            include contAtPrevias.pug
+    .alergias.cont
+        .datosAlergia
+            h2 Alergias
+                span#spanAlergias.icon_mostrar-ocultar(onclick="mostrarOcultar('Alergias')") &#9660;
+            if alergias.length<=0
+                p.vacio No se tiene constancia de antecedentes clínicos del paciente
+            else
+                table#contAlergias.ocultar
+                    thead
+                        tr
+                            th Descripción
+                            th Importancia
+                            th Desde
+                            th Hasta
+                    if alergias.length>0
+                        for alergia in alergias
+                            tr
+                                td= alergia.descNombreAlergia
+                                td= alergia.descImportancia
+                                td= alergia.fechaDesde.toISOString().slice(0,10)
+                                if(alergia.fechaHasta)
+                                    td= alergia.fechaHasta.toISOString().slice(0,10)
+                                else
+                                    td -----
+    .antecedentes.cont
+        .datosAntecedentes
+            h2 Antecedentes
+                span#spanAntecedentes.icon_mostrar-ocultar(onclick="mostrarOcultar('Antecedentes')") &#9660;
+            if antecedentes.length<=0
+                p.vacio No se tiene constancia de antecedentes clínicos del paciente
+            else
+                table#contAntecedentes.ocultar    
+                    thead
+                        tr
+                            th Descripción
+                            th Desde
+                            th Hasta
+                        if antecedentes.length>0
+                            for antecedente in antecedentes
+                                tr
+                                    td= antecedente.descAntecedentes
+                                    td= antecedente.fechaDesde.toISOString().slice(0,10)
+                                    if(antecedente.fechaHasta)
+                                        td= antecedente.fechaHasta.toISOString().slice(0,10)
+                                    else
+                                        td -----
+    .habitos.cont
+        .datosHabitos
+            h2 Habitos
+                span#spanHabitos.icon_mostrar-ocultar(onclick="mostrarOcultar('Habitos')") &#9660;
+            table#contHabitos.ocultar
+                if habitos.length<=0
+                    p.vacio No se tiene información de los habitos del paciente
+                else
+                    table#contHabitos.ocultar
+                        thead
+                            tr
+                                th Descripción
+                                th Desde
+                                th Hasta
+                            if habitos.length>0
+                                for habito in habitos
+                                    tr
+                                        td= habito.descHabitos
+                                        td= habito.fechaDesde.toISOString().slice(0,10)
+                                        if(habito.fechaHasta)
+                                            td= habito.fechaHasta.toISOString().slice(0,10)
+                                        else
+                                            td -----
+    .medicamentos.cont
+        .datosMedicamentos
+            h2 Medicamentos
+                span#spanMedicamentos.icon_mostrar-ocultar(onclick="mostrarOcultar('Medicamentos')") &#9660;
+            if medicamentos.length<=0
+                p.vacio No se tiene constacia de los medicamentos recetados al paciente
+            else
+                table#contMedicamentos.ocultar
+                    thead
+                        tr
+                            th Descripción
+                    if medicamentos.length>0
+                        for medicamento in medicamentos
+                            tr
+                                td= medicamento.descMedicamentos
+    .cerrarAtencion.cont
+        form#formCerrar(action=`/usuario/${idMedico}`) 
+            button.btn-cerrar Cerrar

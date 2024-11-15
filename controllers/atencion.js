@@ -4,6 +4,7 @@ const Antecedentes = require("../models/antecedentes");
 const Alergias = require("../models/alergias");
 const Habitos = require("../models/habitos");
 const Medicamentos = require("../models/medicamentos");
+const Paciente = require("../models/paciente");
 
 class AtencionController {
 
@@ -39,6 +40,39 @@ class AtencionController {
         res.render("../views/atencion/index", { turno, atPrevias, alergias, antecedentes, habitos, medicamentos, nombresAlergias, importanciasAlergias });
     }
 
+    async verHCE(req, res) {
+        const idPaciente = req.params.idPaciente;
+        const idMedico = req.query.medico;
+        
+
+        const [paciente] = await Paciente.buscarPorId(idPaciente);
+        //const turno = await Turno.buscarPorAtencion(idAtencion);
+        //const turno = await Turno.buscarPorId(idTurno);
+        console.log(paciente);
+
+
+        //CARGA HCE
+        const atPrevias = await Atencion.listarAtPrevias(idPaciente);
+        //console.log(atPrevias);
+
+        const alergias = await Alergias.listar(idPaciente);
+        //console.log(alergias);
+
+        const antecedentes = await Antecedentes.listar(idPaciente);
+        //console.log(antecedentes);
+
+        const habitos = await Habitos.listar(idPaciente);
+        //console.log(habitos);
+
+        const medicamentos = await Medicamentos.listar(idPaciente);
+        //console.log(medicamentos);
+
+        //Datos de Nomenclador
+        const nombresAlergias = await Alergias.nomenclador();
+        const importanciasAlergias = await Alergias.listarImportancias();
+
+        res.render("../views/atencion/HCE", { idMedico, paciente, atPrevias, alergias, antecedentes, habitos, medicamentos, nombresAlergias, importanciasAlergias });
+    }
     //Atender con una sola connection
     /* async atender(req, res) {
         const connection = await crearConexion();
@@ -95,24 +129,21 @@ class AtencionController {
         }
 
 
-        /* if (req.body.alergias.length > 0) {
+        if (req.body.alergias.length > 0) {
             await Alergias.cargar(req.body.alergias, req.body.idTurno);
-        } */
+        }
 
-        /* if (req.body.antecedentes.length>0) {
-            //console.log(new Date(req.body.antecedentes[0].fechaHasta))
+        if (req.body.antecedentes.length>0) {
             await Antecedentes.cargar(req.body.antecedentes, req.body.idTurno);
-        } */
+        }
 
-        /* if (req.body.habitos.length>0) {
-            //console.log(new Date(req.body.antecedentes[0].fechaHasta))
+        if (req.body.habitos.length>0) {
             await Habitos.cargar(req.body.habitos, req.body.idTurno);
-        } */
+        }
 
-        /* if (req.body.medicamentos.length>0) {
-            //console.log(new Date(req.body.antecedentes[0].fechaHasta))
+        if (req.body.medicamentos.length>0) {
             await Medicamentos.cargar(req.body.medicamentos, req.body.idTurno);
-        } */
+        }
 
         res.send(data);
     }

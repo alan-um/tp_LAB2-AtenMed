@@ -6,7 +6,7 @@ const pug = require("pug");
 
 //Recibe turno pendiente y genera la atención!!
 atencionRouter.get("/atender/:idTurno",atencionController.atender);
-//atencionRouter.get("/verHCE/:idAtencion",atencionController.index);
+atencionRouter.get("/verHCE/:idPaciente",atencionController.verHCE);
 atencionRouter.post("/cargarAtencion",atencionController.cargarAtencion);
 
 

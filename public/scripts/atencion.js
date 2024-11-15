@@ -1,15 +1,15 @@
+mostrarOcultar("AtPrevias")
+//mostrarOcultar("Alergias")
+//mostrarOcultar("Antecedentes")
+//mostrarOcultar("Habitos")
+//mostrarOcultar("Medicamentos")
+
 //funciones del Rich Text Editor---------------------------------------------
 const quill = new Quill("#editor", {
     theme: "snow",
 });
 let texto, formato;
 //------------------------------------------------------------------------------
-
-mostrarOcultar("AtPrevias")
-mostrarOcultar("Alergias")
-mostrarOcultar("Antecedentes")
-mostrarOcultar("Habitos")
-mostrarOcultar("Medicamentos")
 
 function mostrarOcultar(contenido) {
     const s = document.getElementById(`span${contenido}`);
